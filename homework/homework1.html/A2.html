@@ -1,0 +1,12 @@
+<script></script>
+var str=prompt("v");
+space(str);
+function space(text = "") {
+  // console.log(text.split(" "));
+  const filtered = text.split(" ").filter((elem, i, arr) => {
+    return elem || (arr[i-1] && arr[i+1]);
+  }).join(" ");
+  
+    alert("#"+filtered+"#")
+}
+</script>

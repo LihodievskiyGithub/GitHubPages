@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="img">
+        <input type="text" id="brand">
+        <input type="text" id="model">
+        <input type="text" id="price">
+        <input type="text" id="sale">
+
+    </div>
+
+    <button type="button" onclick="getValue()">Добавить</button>
+    <button type="button" onclick="getHtml()">Воспроизвести</button>
+    <button type="button" onclick="getValue()">Удалить</button>
+    <div id="add"></div>
+
+
+<script>
+    let phones=[];
+    let obj={};
+    function getValue(){
+        const img=document.getElementById('img');
+        const brand=document.getElementById('brand');
+        const model=document.getElementById('model');
+        const price=document.getElementById('price');
+        const sale=document.getElementById('sale');
+        obj={
+            img: img.value,
+            brand: brand.value,
+            model: model.value,
+            price: price.value,
+            sale: sale.value
+        };
+        phones.push(obj);
+    }
+
+    let html='';
+    function getHtml(){
+        for(let i=0; i<phones.length; i++){
+            html+=`<div class="card" style="width: 18rem;">
+    <img src="${phones[i].img}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${phones[i].brand}</h5>
+      <h6 class="card-title">${phones[i].model}</h6>
+      <p class="card-text">iOS, экран 6.1" IPS (828x1792), A13 Bionic, ОЗУ 4 ГБ, флэш-память 64 ГБ, камера 12 Мп, аккумулятор 3046 мАч, 1 SIM</p>
+      <h5 class="card-title">${phones[i].price}$</h5>
+      <a href="#" class="btn btn-primary">В корзину</a>
+    </div>
+  </div>`
+    }
+    const add=document.getElementById('add');
+    add.innerHTML=html;
+    }
+
+</script>
+</body>
+</html>

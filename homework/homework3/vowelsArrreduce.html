@@ -1,0 +1,23 @@
+<script>
+    var str = prompt("Введите любую строку", "").toLowerCase();
+  
+      function sumVowels(str) {
+          var vowels = ['а','о','и','е','ё','э','ы','у','ю','я'];
+          var arr = str.split('');
+         var sum = arr.reduce(function(result, item, i, arr){
+             if(vowels.indexOf(item) != -1){
+                 return result + 1;
+                 
+             }
+             else {
+                 return result + 0;
+                
+             };
+             
+         }, 0);
+         return sum;
+        };
+
+        console.log(`${sumVowels(str)} гласных`);
+  
+  </script>

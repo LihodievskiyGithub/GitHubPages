@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANKETA</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        var namep="Введите Ваше имя";
+        var Famp="Введите Вашу Фамилию";
+        var otchp="Введите Ваше отчество";
+        var Fam= validateStr(Famp);
+        var name= validateStr(namep);
+        var otch= validateStr(otchp);
+
+        function validateStr(askQuestion) {
+            let text = prompt(askQuestion) || "";
+            const invalidMessage = getInvalidMessageForSrting(text);
+            if (invalidMessage) {
+                text = validateStr(invalidMessage);
+            }
+            return text;
+        }
+
+        function checkForNumbers(text) { // [и, м, я]
+            if (typeof text !== "string") return false;
+            return Array.from(text).every((symb => {
+                const num = Number(symb);
+                return Number.isNaN(num);
+            }));
+        }
+
+        function getInvalidMessageForSrting(text = "") {
+            if (text.length === 0) {
+                return "Заполните поле!!";
+            }
+            else if (!checkForNumbers(text)) {
+                return "Введите только буквы";
+            }
+            else if (text.length > 10) {
+                return "Введите еще раз, не более 10 знаков";
+            }
+        }
+        //var name=prompt("Введите Ваше имя");
+       // var otch=prompt("Введите Ваше отчество");
+       var age=prompt("Введите Ваш возраст");
+       var RealAge=parseInt(age);
+       age=validNum();
+       function validNum(){
+        //    for(var RealAge=parseInt(age);(Boolean(RealAge)==false);age=prompt("Введите данные корректно"));
+            while(true){
+                
+                if (Boolean(RealAge)===false){
+                    age=prompt("Введите данные корректно") ;
+                RealAge=parseInt(age);
+                }
+                else{
+                    if(RealAge>150){
+                        age=prompt("Введите реальный возраст!")
+                        RealAge=parseInt(age);
+                    }
+                    else{break;}
+                }
+            }
+            
+            return RealAge;
+        };
+      
+        var gender=confirm('Если вы женщина- нажмите "ОК", если вы мужчина- нажмите "Отмена"');
+        
+        
+        var pen;
+        if (gender){
+            gender="женщина";
+            if (RealAge>60){
+            pen="да"}
+            else{
+            pen="нет";
+
+        }}
+        else{
+            gender="мужчина";
+            if (RealAge>65){
+            pen="да"}
+            else {
+            pen="нет"
+        }
+                };
+                alert(`ваше ФИО: ${Fam} ${name} ${otch} 
+ваш возраст в годах: ${RealAge} 
+ваш возраст в днях: ${(RealAge*365)}
+через 5 лет вам будет: ${(RealAge+5)}
+ваш пол: ${gender}
+вы на пенсии: ${pen}`);
+                //alert("ваше ФИО:"+Fam+" "+name+" "+otch+"\nваш возраст в годах:"+" "+RealAge+"\nваш возраст в днях:"+" "+(RealAge*365)+"\nчерез 5 лет вам будет: "+(RealAge+5)+"\nваш пол: "+gender+"\nвы на пенсии:"+pen);
+    </script>
+</body>

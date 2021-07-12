@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COUNTRIES</title>
+</head>
+<body>
+    <input type='button' value='Ввод инф о стране' onclick='inputCountry( )'>
+    <input type='button' value='получение информации о стране' onclick='getCountryData( )'>
+    <input type='button' value='перечень всех стран' onclick='getAllCountry( )'>
+    <input type='button' value='удаление информации о стране' onclick='deleteCountryInfo( )'>
+
+
+    <script>
+        var countrysH = {};
+
+function addCountry(countryName, capitalName) {
+  countrysH[countryName] = capitalName;
+}
+
+function deleteCountry(countryName) {
+  delete countrysH[countryName];
+}
+
+function getCountryInfo(countryName) {
+  if (countryName in countrysH)
+    return "страна: " + countryName + " столица: " + countrysH[countryName];
+  else return "нет информации о стране " + countryName + "!";
+}
+
+function listCountrys() {
+  var res = "";
+  for (var CN in countrysH) res += "\n" + getCountryInfo(CN);
+  return res;
+}
+
+addCountry("Германия", "Берлин");
+addCountry("Англия", "Лондон");
+addCountry("Франция", "Париж");
+
+function inputCountry() {
+  var countryName = window.prompt("Введите название страны");
+  var capitalName = window.prompt("Введите название столицы");
+  if (countryName && capitalName) {
+    addCountry(countryName, capitalName);
+  }
+  getAllCountry();
+}
+
+function getCountryData() {
+  var countryName = window.prompt("Введите название страны");
+
+  alert(getCountryInfo(countryName));
+  console.log(countrysH);
+}
+
+function getAllCountry() {
+  console.log(listCountrys());
+}
+
+function deleteCountryInfo() {
+  var countryName = window.prompt("Введите название страны");
+  deleteCountry(countryName);
+  getAllCountry();
+}
+
+    </script>
+</body>
+</html>

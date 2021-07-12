@@ -1,0 +1,26 @@
+<script>
+function pal(str) {
+         var strLen = str.length;
+        var strReverse = str.split('').reverse().join('').toLowerCase();
+         if (filterExtraSymbols(strReverse) === filterExtraSymbols(str)) {
+           return 'палиндром';
+         } 
+       else {
+           return 'не палиндром';
+        }
+      }
+    
+         function filterExtraSymbols(str) {
+           return str.split("").filter((symb) => {
+               return !"ьъ,.;!:\"?%&*$#@-=+><«» ".includes(symb);
+           }).join("").replace(/[ё]/g, 'е').replace(/[ъ]/g, 'ь').toLowerCase(); 
+         }
+     console.log(filterExtraSymbols);
+    
+       test = pal('Лёзу на санузел');
+          test2 = pal('лёлел');
+    
+       console.log(test);
+       console.log(test2);     
+       document.write('Результат: ' + 'первый - ' + test + '; второй - ' + test2);
+    </script>
