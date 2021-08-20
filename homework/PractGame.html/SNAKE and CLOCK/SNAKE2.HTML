@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQUEREMOVE</title>
+</head>
+<body>
+    <style>
+        .pole{
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: solid black 1px;
+        }
+
+        .snake{
+            width: 30px;
+            height: 30px;
+           
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+
+<body>
+    <div class="pole" id="pole">
+        <div class="snake" id="snake"></div>
+    </div>
+
+    <script>
+        "use sctrict"
+        let pole = document.getElementById("pole");
+        let snake = document.getElementById("snake");
+
+        let x = 0;
+        let y = 0;
+        let timer;
+
+        let move = function (gg){
+            timer = setInterval(gg, 1)
+        }
+
+        function down(){
+            if(snake.offsetTop >= pole.clientWidth - snake.offsetWidth){ 
+                clearInterval(timer);
+            }
+            y++
+            snake.style.top = y + "px";
+            
+        }
+
+        function  right(){
+            if(snake.offsetLeft >= pole.clientWidth - snake.offsetWidth){ 
+            clearInterval(timer);
+            }
+            x++;
+             snake.style.left = x + "px";
+            
+        }
+
+        function left(){
+            if(snake.offsetLeft <= 0){ 
+                clearInterval(timer);
+            }
+            x--;
+            snake.style.left = x + "px";
+            
+        }
+
+        function up(){
+            if(snake.offsetTop <= 0){  
+                clearInterval(timer);
+            }
+            y--
+            snake.style.top = y + "px";
+            
+        }
+
+        window.addEventListener("keydown", go);
+
+
+
+        function go(ev) {
+            
+          
+
+                let key = ev.key;
+                switch (key) {
+                    case "ArrowDown":
+                      if(timer){
+                        clearInterval(timer);
+                      }
+                      timer = setInterval(down,)
+                
+                        break;
+
+                    case "ArrowRight":
+                    if(timer){
+                        clearInterval(timer);
+                    }
+                    timer = setInterval(right, 1)
+                
+                        break;
+
+                    case "ArrowLeft":
+                        if(timer){
+                            clearInterval(timer);
+
+                        }
+                        timer = setInterval(left, 1)
+                        break;
+
+                    case "ArrowUp":
+                    if(timer){
+                        clearInterval(timer);
+                    }
+                    timer = setInterval(up, 1)
+                   
+                       
+                        break;
+                    
+                    default:
+
+                }
+ 
+
+ 
+            }
+
+        
+    </script>
+</body>
+</html>

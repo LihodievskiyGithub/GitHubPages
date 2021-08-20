@@ -1,13 +1,25 @@
 <script>
-var numb=[  5, 7, 
+let arr=[  5, 7, 
         [ 4, [2], 8, [1,3], 2 ], 
         [ 9, [] ], 
         1, 8
           
-      ]; 
-var flatNumb = numb.flat(Infinity).reduce(function(a,b) {
-return a+b;
-});
+      ];
 
-alert(`Получилось: ${flatNumb}`);
+      function treeSum(array) {
+	let mean;
+  let sum = 0;
+  for(let i=0; i<array.length; i++){
+  mean = array[i];
+  if(Array.isArray(mean)){
+    sum += treeSum(mean);
+  } else{
+    sum += mean;
+
+  }
+};
+return sum;
+      };
+
+alert(`Получилось: ${treeSum(arr)}`);
 </script>

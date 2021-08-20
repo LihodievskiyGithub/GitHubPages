@@ -1,0 +1,13 @@
+<script>
+    let name = prompt('Введите:')
+   function buildWrapper(tag){
+     const create = tag.toLowerCase();
+     return function newElement(str){
+       return `<${create}>${str.replace(/[<]/g, '&rsaquo;').replace(/[>]/g, '&lsaquo;').replace(/[']/g, '&rsquo;').replace(/["]/g, '&rdquo;').replace(/[&]/g, '&amp;')}</${create}>`;
+     }
+   }
+   const addEl = buildWrapper("H1");
+   alert(addEl(name));
+  //  "M&M's"
+   </script>
+

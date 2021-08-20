@@ -1,0 +1,25 @@
+<script>
+    function formatNumber(number, mask) {
+    let newNumber = number.toFixed(2).toString().split('.');
+    let newNumberInc = newNumber[0].split().reverse();
+    let newMask = mask.split('.');
+    let newMaskInc = newMask[0].split().reverse();
+    let res = "";
+
+    newNumberInc.forEach((element, i) => {
+        if(newMaskInc[i] !== '#') {
+          
+            res += newMaskInc[i];
+        } 
+        res += element;
+        
+    });
+    return Array.from(res).reverse().join().concat('.' + newNumber);
+    
+};
+
+    console.log( formatNumber(2.3,"# ### ###.##") );
+    console.log( formatNumber(12345.368,"# ### ###.##") );
+</script>
+   
+ 

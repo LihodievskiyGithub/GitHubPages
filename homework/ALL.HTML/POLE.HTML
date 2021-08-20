@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLE</title>
+</head>
+<body>
+
+    <style>
+        .pole{
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            /* background-color: green; */
+        }
+
+        .grass{
+           background-image: url(https://www.cadblocksfree.com/media/catalog/product/cache/d49ccc8915e6448f0e87ecc29419c700/g/r/grasstexture40.png);
+           
+           background-size: cover;
+
+        }
+
+        .brick{
+            background-image: url(https://kartinkin.com/uploads/posts/2021-07/1626844147_22-kartinkin-com-p-tekstura-kirpicha-mainkraft-krasivo-22.png);
+            /* width: 30px;
+            height: 30px; */
+            background-size: cover;
+        }
+
+        .money {
+            background-image: url(https://e7.pngegg.com/pngimages/944/747/png-clipart-coins-coins-thumbnail.png);
+            /* width: 30px;
+            height: 30px; */
+            background-size: cover;
+        }
+
+
+    </style>
+
+    <div class="pole" id="pole"></div>
+
+    <script>
+        const app = document.getElementById("pole")
+        
+        let areaH=[
+
+            [0, 0, 2],
+            [0, 1, 0],
+            [0, 1, 0],
+            [0, 1, 0],
+            [2, 0, 2],
+        ];
+
+        for(let i = 0; i<areaH.length; i++){
+            for(let t = 0; t<areaH[i].length; t++){
+                if(areaH[i][t] === 0){
+                    createGrass();
+                }
+                else if(areaH[i][t] === 1){
+                    createBrick();
+                }
+                else if(areaH[i][t] === 2){
+                    createMoney();
+                }
+            }
+        }
+
+        function createGrass(){
+            let div = document.createElement('div');
+            div.className = "grass";
+            app.appendChild(div);
+        }
+
+        function createBrick(){
+            let div = document.createElement('div');
+            div.className = "brick";
+            app.appendChild(div);
+        }
+
+        function createMoney(){
+            let div = document.createElement('div');
+            div.className = "money";
+            app.appendChild(div);
+        }
+
+    </script>
+
+</body>
+</html>

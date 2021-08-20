@@ -1,0 +1,23 @@
+<script>
+    let name = prompt('Введите слово:')
+function checkPalindrome(str){
+    str = str.replace(/[ё]/g, 'е').replace(/[ъ]/g, 'ь').replace(/[\s]/g, '').replace(/[,]/g, '').replace(/[!]/g, '').replace(/[«]/g, '').replace(/[»]/g, '').toLowerCase(); 
+
+    if(str.length === 1){
+     return ("Палиндром");
+    };
+    if(str.length === 2){
+         return str[0] === str[1];
+    };
+    if(str[0] === str.slice(-1)) {
+        return checkPalindrome(str.slice(1,-1)) 
+    };
+
+    return ("Не палиндром");
+    
+}
+
+alert(checkPalindrome(name));
+
+
+</script>

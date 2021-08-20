@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIME-2</title>
+</head>
+<body>
+   <style>
+      
+
+    #wrapper {
+	width: 300px;
+	height: 300px;
+	border-radius: 150px;
+	background-color: #FCCA66;
+    margin: 0 auto;
+}
+
+.childElement {
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background-color: #48B382;
+	position: absolute;
+	text-align: center;
+	line-height: 40px;
+	font-size: 20px;
+}
+
+
+.childElemElect {
+	width: 120px;
+	height: 30px;
+	position: absolute;
+	text-align: center;
+	line-height: 30px;
+	font-size: 25px;
+	color: black;
+}
+
+.arrowHours {
+	width: 9px;
+	height: 60px;
+	border-radius: 10px;
+	position: absolute;
+	background-color: black;
+}
+
+.arrowMinutes {
+	width: 5px;
+	height: 120px;
+	border-radius: 10px;
+	position: absolute;
+	background-color: black;
+}
+
+.arrowSeconds {
+	width: 2px;
+	height: 145px;
+	border-radius: 10px;
+	position: absolute;
+	background-color: black;
+} 
+   </style>
+
+    <div id="wrapper">
+
+
+    </div>
+    
+    
+
+    <script>
+        // 1 Шаг - достаем id
+         let wrap = document.getElementById('wrapper');
+        // узнаем центр DIV по X
+         let wrapX = wrap.offsetLeft + wrap.offsetWidth / 2;
+        // узнаем центр DIV по Y 
+         let wrapY = wrap.offsetTop + wrap.offsetHeight / 2;
+         // создаем DIV(для электронных часов)
+          let wrapChildElemElect = document.createElement("div");
+         // радиус (растояние)
+          let radius = 120;
+         // радиус (растояние) для электронных часов
+          let radiusElect = 70;
+        // Угол
+         let angleValue = 0;
+        // расстояние(в градусах) между цифрами на часах
+         let distanceOfElect = 30;
+        // Создаем текущее время
+         let time = new Date();
+        // Cоздаем DIV(для стрелки часов)
+         let arrowHours = document.createElement("div");
+        // Cоздаем DIV(для стрелки минут)
+         let arrowMinutes = document.createElement("div");
+        // Cоздаем DIV(для стрелки секунд)
+         let arrowSeconds = document.createElement("div");
+        // Определяем по времени где должна быть стрелка часов
+         let hoursDegris = 30 *(time.getHours() + (1 / 60) * time.getMinutes());
+        // Oпределяем по времени где должна быть стрелка минут
+         let minutesDegris = 6 * (time.getMinutes() + (1 / 60) * time.getSeconds());
+        // Oпределяем по времени где должна быть стрелка секунд
+         let secondsDegris = 6 * time.getSeconds();
+        // Цифры часов
+         let hourCount = 12;
+
+        for (let i = 1; i <= hourCount; i++){
+            // Cоздаем DIV(для номеров часов)
+            let wrapChildElem = document.createElement("div");
+             let angle;
+             let wrapChildElemX;
+		     let wrapChildElemY;
+
+            angleValue += distanceOfElect;
+	        angle = angleValue / 180 * Math.PI;
+
+
+            // Cозданный DIV(для номеров часов) делаем дочерным элементом wrap
+             wrapChildElem = wrap.appendChild(wrapChildElem);
+            // Добавляем готовый класс для дочерных элементов
+             wrapChildElem.classList.add('childElement');
+            // Значением каждого дочерного элемента будет равен i, по которому мы бегаем массивом
+             wrapChildElem.innerHTML = i;
+
+            // Узнаем центр дочерного элемента по X (слайд D.40)
+             wrapChildElemX = wrapX + radius * Math.sin(angle);
+            // Узнаем центр дочерного элемента по Y (слайд D.40)
+             wrapChildElemY = wrapY - radius * Math.cos(angle)
+
+             wrapChildElem.style.left = Math.round(wrapChildElemX - wrapChildElem.offsetWidth/2) + "px";
+             wrapChildElem.style.top = Math.round(wrapChildElemY - wrapChildElem.offsetHeight/2) + "px";
+ 
+        }
+            // Bставляем созданные элементы в конец дочерных элементов wrap
+
+            // Cозданный DIV(для электронных часов) делаем дочерным элементом wrap
+             wrapChildElemElect = wrap.appendChild(wrapChildElemElect);
+            // Cозданный DIV(для стрелки часов, минут и секунд) делаем дочерным элементом wrap
+             arrowHours = wrap.appendChild(arrowHours);
+             arrowMinutes = wrap.appendChild(arrowMinutes);
+             arrowSeconds = wrap.appendChild(arrowSeconds);
+
+
+            // Добавлаяем классы для электронных часов и к каждой стрелке
+             wrapChildElemElect.classList.add("childElemElect");
+             arrowHours.classList.add("arrowHours");
+             arrowMinutes.classList.add("arrowMinutes");
+             arrowSeconds.classList.add("arrowSeconds");
+
+
+            // Oпределяем, где будет стоять электронные часы
+             wrapChildElemElect.style.left = wrapX - wrapChildElemElect.offsetWidth/2 + "px";
+             wrapChildElemElect.style.top = wrapY - radiusElect + "px"; 
+            // Oпределяем, где будет стоять стрелка часа
+             arrowHours.style.top = wrapY - arrowHours.offsetHeight+10 + "px";
+             arrowHours.style.left = wrapX - arrowHours.offsetWidth/2 + "px";
+            // Oпределяем, где будет стоять стрелка минут
+             arrowMinutes.style.top = wrapY - arrowMinutes.offsetHeight+10 + "px";
+             arrowMinutes.style.left = wrapX - arrowMinutes.offsetWidth/2 + "px";
+            // Oпределяем, где будет стоять стрелка секнд
+             arrowSeconds.style.top = wrapY - arrowSeconds.offsetHeight+10 + "px";
+             arrowSeconds.style.left = wrapX - arrowSeconds.offsetWidth/2 + "px";
+
+
+            // Oпределяем точку трансформации стрелок часов, минут, секунд по оси X и Y
+             arrowHours.style.transformOrigin = "center 50px";
+             arrowMinutes.style.transformOrigin = "center 110px";
+             arrowSeconds.style.transformOrigin = "center 135px";
+
+
+            // Функция для определения положение электронных часов и стрелок для часов, минут, секунд
+            function launch(){
+                // Электронные часы
+                let time = new Date(); // Будет показывать текущее время
+                wrapChildElemElect.innerHTML = time.toLocaleTimeString();
+                // Стрелка часов
+                hoursDegris += 6 * (1/360); // Каждую секунду стрелка часа будет двигать на 6*(1/360) градусов
+                arrowHours.style.transform = "rotate(" + hoursDegris + "deg)";
+                // Стрелка минут
+                minutesDegris += 6 * (1/60);// Каждую секунду стрелка минут будет двигать на 6*(1/60) градусов
+                arrowMinutes.style.transform = "rotate(" + minutesDegris + "deg)";
+                // Стрелка секунд
+                secondsDegris += 6; // Каждую секунду стрелка секунд будет двигать на 6*(1/60) градусов
+                arrowSeconds.style.transform = "rotate(" + secondsDegris + "deg)";
+            }
+
+            // Вызываем функцию на момент загрузки страницы
+            window.onload = launch();
+            // Устанавливаем setInterval на 1 секунду и выполняем код каждую секунду чтоб стрелки часов, минут и секунд обновляли положени каждую секунду
+            window.setInterval(launch, 1000);
+
+
+        
+    </script>
+
+</body>
+</html>

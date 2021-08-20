@@ -69,7 +69,7 @@
  </style>
 <body>
     <div class="container">
-        <div class="item input"><form name="form"><input type="text" name="textview" readonly></form></div>
+        <div class="item input"><form name="form"><input type="text" name="textview" readonly id="str"></form></div>
         <div class="item clean" onclick="deletaAll('')">C</div>
         <div class="item back" onclick="deleteOneValue()">&larr;</div>
         <div class="item" onclick="getValue('+')">+</div>
@@ -87,7 +87,7 @@
         <div class="item" onclick="getValue('1')">1</div>
         <div class="item" onclick="getValue('2')">2</div>
         <div class="item" onclick="getValue('3')">3</div>
-        <div class="item equal onclick="func()">=</div>
+        <div class="item equal onclick="addNum()">=</div>
         <div class="item zero" onclick="getValue('0')">0</div>
         <div class="item" onclick="getValue('.')">.</div>
     </div>
@@ -107,7 +107,10 @@
         }
 
 
-
+        let sum = 0;
+        function addNum(){
+           document.getElementById("str")=summ;
+        }
     </script>
     
 </body>

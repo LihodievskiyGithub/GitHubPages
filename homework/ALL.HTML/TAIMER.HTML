@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: black;
+        }
+
+        #color{
+            color: white;
+            font-weight: bold;
+            margin-top: 200px;
+            text-align: center;
+            font-size: 200px;
+        }
+
+    </style>
+
+
+
+    <div id="color"></div>
+
+
+    <script>
+        window.onload = function(){
+            window.setInterval(function() {
+                let date =new Date(); // Сделали экземпляр класса Date
+                 // создадим три переменные, которые будух хранить часы, минуты и секунды
+                 let hours = date.getHours(); // getHours - возвращает часы от указанной даты
+                 let minutes = date.getMinutes();// Тоже самое, толькос с минутами
+                 let second = date.getSeconds();// Тоже самое, только с секундами
+                    if(hours < 10){
+                        hours = "0" + hours;
+                    }
+                    if(minutes < 10){
+                        minutes = "0" + minutes;
+                    }
+                    if(second < 10){
+                        second = "0" + second;
+                    }
+                 // Вызываем переменные
+                 let clock = hours + ":" + minutes + ":" + second;
+                 document.getElementById("color").innerHTML = clock; // Присваиваем значение переменной clock к блоку div
+                
+                
+                }, 1000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- function printNumbers(from, to) {
+    //   let current = from;
+    
+    //   let timerId = setInterval(function() {
+    //     alert(current);
+    //     if (current == to) {
+    //       clearInterval(timerId);
+    //     }
+    //     current++;
+    //   }, 1000);
+    // }
+    
+    // // использование:
+    // printNumbers(5, 10); -->
+
+<!-- 
+function printNumbers(from, to) {
+    let current = from;
+  
+    setTimeout(function go() {
+      alert(current);
+      if (current < to) {
+        setTimeout(go, 1000);
+      }
+      current++;
+    }, 1000);
+  }
+  
+  // использование:
+  printNumbers(5, 10); -->

@@ -7,6 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        .collector {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+        }
+    </style>
     <div>
         <input type="text" id="img">
         <input type="text" id="brand">
@@ -19,9 +26,16 @@
     <button type="button" onclick="getValue()">Добавить</button>
     <button type="button" onclick="getHtml()">Воспроизвести</button>
     <button type="button" onclick="getValue()">Удалить</button>
-    <div id="add"></div>
+    <div id="add">
 
+    </div>
 
+<div class="collector" id="app" >
+    <img id="basket" src="https://www.maam.ru/illustrations/33/medium/item_340.jpg" alt="">
+    <p class="price" id="totalPrice">
+
+    </p>
+</div>
 <script>
     let phones=[];
     let obj={};
@@ -44,7 +58,7 @@
     let html='';
     function getHtml(){
         for(let i=0; i<phones.length; i++){
-            html+=`<div class="card" style="width: 18rem;">
+            html+=`<div id="${i}" class="card" style="width: 18rem;" draggable="true">
     <img src="${phones[i].img}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${phones[i].brand}</h5>
@@ -58,6 +72,33 @@
     const add=document.getElementById('add');
     add.innerHTML=html;
     }
+
+    const app = document.getElementById("app");
+    const basket = document.getElementById("basket");
+    const totalPrice = document.getElementById("totalPrice");
+    let itemId = null;
+    let priceCount = 0;
+
+    document.addEventListener("dragstart", function (ev) {
+        console.log(ev);
+        itemId = ev.target.id;
+    });
+    
+    document.addEventListener("dragover", function (ev) {
+        ev.preventDefault();
+    });
+console.log(phones);
+    basket.addEventListener("drop", function (ev) {
+        const itemBlock = document.createElement("div");
+        const title = document.createElement("p");
+        title.innerHTML = phones[itemId].brand + " " + phones[itemId].model + " - " + phones[itemId].price + "$";
+        itemBlock.appendChild(title);
+        this.appendChild(itemBlock);
+        priceCount += parseFloat(phones[itemId].price);
+        totalPrice.innerHTML = priceCount + "$";
+    });
+    
+   
 
 </script>
 </body>

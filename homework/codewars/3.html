@@ -1,0 +1,14 @@
+<script>
+    "use script"
+
+    function highAndLow(x){
+        let newArr = x.split(' ').map(function(elem){
+            return elem;
+        })
+        return{
+           min: Math.min(...newArr),
+           max : Math.max(...newArr),
+        }
+    };
+    console.log(highAndLow('1 2 3 4 100 123 2222 -111 123123'));
+</script>

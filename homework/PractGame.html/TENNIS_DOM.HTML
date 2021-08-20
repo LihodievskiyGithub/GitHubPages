@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TENNIS_DOM</title>
+</head>
+<body>
+
+    <style>
+        body {
+	padding: 0px;
+	width: 700px;
+}
+
+.textGoal {
+	margin: 150px auto 0px auto;
+	width: 150px;
+	font-size: 75px;
+	line-height: 75px;
+	text-align: center;
+}
+
+#field {
+	margin: 0px auto;
+	border: 1px solid black;
+	background-color: #F0EE7E;
+}
+
+.buttonStart {
+	float: left;
+	margin-top: 30px;
+	width: 100px;
+	font-size: 20px;
+}
+
+.boardScore {
+	margin: 30px auto 30px auto;
+	width: 150px;
+	font-size: 55px;
+	line-height: 55px;
+	text-align: center;
+}
+
+.racket1 {
+	width: 10px;
+	height: 120px;
+	position: absolute;
+	background-color: #09AA57;
+}
+.racket2 {
+	width: 10px;
+	height: 120px;
+	position: absolute;
+	background-color: #191497;
+
+}
+
+.ball {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	border-radius: 15px;
+	background-color: #F02137;
+} 
+    </style>
+
+
+
+
+	<div id="field">
+
+	</div>
+
+
+
+    <script>
+
+
+
+    // 1) ПЕРВЫЙ ЭТАП! - ДЕЛАЕМ ПЕРЕМЕННЫЕ ВВЕРХУ (КАК СКАЗАНО В УСЛОВИИ)
+        // Размеры поля
+        let field = document.getElementById("field");
+        let fieldWidth = "700px";
+        let fieldHeight = "400px";
+
+        // Сделаем кнопку старт
+        let buttonStart = document.createElement("input");
+
+        // Табло
+        let boardScore = document.createElement("div");
+        score1 = 0;
+        score2 = 0;
+        
+        // Ракетки
+        let racket1 = document.createElement("div"); 
+        let racket2 = document.createElement("div");
+        let racketH; //создаём переменную racketH для дальнейшей работы с ракетками
+        let racketArea; //создаём переменную racketArea для дальнейшей работы с ракетками
+
+        // Мяч
+        let ball = document.createElement("div");
+        let ballH; //создаём переменную ballH для дальнейшей работы с мячиком
+        let ballArea; //создаём переменную ballArea для дальнейшей работы с мячиком
+
+        // Таймер
+        let settimeout; // Переменная, для дальнейшей работы с таймером
+
+        // Текст, который будет отображаться, когда будет гол
+        let textGoal = document.createElement("div");
+        let textMassage = "Goal!!!"
+
+
+
+
+    // 2) ВТОРОЙ ЭТАП! - ГРУБО ГОВОРЯ, СОЗДАЕМ ПОЛЕ НА ЭКРАНЕ 
+
+        // Текст, который будет отображаться, когда будет гол
+        textGoal.classList.add("textGoal"); // присваеваем готовый класс
+        textGoal = field.appendChild(textGoal);// апендим в field
+
+        // задаем размеры для field
+        field.style.width = fieldWidth;
+        field.style.height = fieldHeight;
+
+        // requestAnimationFrame указывает браузеру на то, что вы хотите произвести анимацию, и просит его запланировать перерисовку на следующем кадре анимации. В качестве параметра метод получает функцию, которая будет вызвана перед перерисовкой.
+        requestAnimationFrame(tick);
+        
+
+        // Создадим кнопку "Старт"
+        buttonStart.type = button; // Задаем тип
+        buttonStart.value = "Начнем игру!"// Значение, которое будет написано на кнопке
+        buttonStart.classList.add("buttonStart");// Добавляем готовый класс для кнопки
+        
+        // Созданную кнопку делаем дочерним элементом "body" =>
+        buttonStart = document.body.insertBefore(buttonStart, document.body.children[0]); // родитель.insertBefore(элемент, перед кем вставить) - СИНТАКСИС
+        buttonStart.onclick = start; //на onclick ставим функцию start(при клике на кнопку запусскаем функцию)
+
+        // Создаем табло
+        boardScore.classList.add("boardScore");
+        boardScoreInnerHTML(); // вызываем функцию, чтобы на табло вывести очки
+        boardScore = document.body.insertBefore(boardScore, document.body.children[1]);
+
+        // Создаем ракетки
+          // Установим классы на левую и праву ракетку
+        racket1 = document.classList.add("racket1");
+        racket2 = document.classList.add("racket2");
+
+          //Сделаем ракетки дочерними элементами поля (field)
+        racket1 = field.appendChild(racket1);
+        racket2 = field.appendChild(racket2);
+
+        racketH = {
+	// первая(левая) ракетка
+	racket1PosX: field.getBoundingClientRect().left,
+	racket1PosY: field.getBoundingClientRect().top + field.getBoundingClientRect().height/2 - racket1.getBoundingClientRect().height/2,
+	racket1Speed: 0,
+	// вторая(правая) ракетка
+	racket2PosX: field.getBoundingClientRect().left + field.getBoundingClientRect().width - racket2.getBoundingClientRect().width,
+	racket2PosY: field.getBoundingClientRect().top + field.getBoundingClientRect().height/2 - racket1.getBoundingClientRect().height/2,
+	racket2Speed: 0,
+	width: 10,
+	height: 120,
+
+	update: function() {
+				let racket1Obj = racket1,
+					racket2Obj = racket2;
+
+					racket1Obj.style.left = this.racket1PosX + "px";
+					racket1Obj.style.top = this.racket1PosY + "px";
+
+					racket2Obj.style.left = this.racket2PosX + "px";
+					racket2Obj.style.top = this.racket2PosY + "px";					
+			}
+};
+
+racketArea = {
+	width: 10,
+	height: field.getBoundingClientRect().height
+};
+
+racketH.update();
+
+
+// Делаем мяч
+
+ball.classList.add('ball'); //устанавливаем готовый CSS класс
+ball = field.appendChild(ball); //созданный мячик делаем дочерным элементом wrap
+
+ballH = {
+	posX: field.getBoundingClientRect().left + field.getBoundingClientRect().width/2 - ball.getBoundingClientRect().width/2,
+	posY: field.getBoundingClientRect().top + field.getBoundingClientRect().height/2 - ball.getBoundingClientRect().height/2,
+	speedX: 0, 
+	speedY: 0, 
+	width: 30,
+	height: 30,
+
+	update: function() {
+				var ballObj = ball;
+				ballObj.style.left = this.posX + "px";
+				ballObj.style.top = this.posY + "px";
+			}
+};
+
+ballArea = {
+	width: field.getBoundingClientRect().width,
+	height: field.getBoundingClientRect().height
+};
+
+ballH.update();
+
+
+
+
+
+
+
+    </script>
+</body>
+</html> 

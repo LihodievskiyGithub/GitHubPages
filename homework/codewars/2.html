@@ -1,0 +1,16 @@
+<script>
+    function accum(str){
+        let resultArray = [];
+        str.split('').forEach((element, i) => {
+            const newEl = new Array(i).fill(element.toLowerCase()); 
+            //fill - заполнить массив тем, что ты туда передаешь!; переменная newEl - последующие буквы после загклавной буквы;
+            console.log(newEl);
+            resultArray.push(`${element.toUpperCase()}${newEl.join('')}`); //Берем заглавную букву 
+            
+        });
+        console.log(resultArray);
+        return resultArray.join('-');
+        
+    }
+    console.log(accum("abcdefg"));
+</script>

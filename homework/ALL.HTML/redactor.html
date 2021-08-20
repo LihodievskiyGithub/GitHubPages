@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            display: flex;
+        }
+        .container{
+            margin-left:50px;
+            width: 300px;
+        }
+    </style>
+
+
+<div class="box">
+    <input type="text" id="app">
+    <input type="submit" value="div" onclick="getElStr()">
+    <input type="submit" value="strong" onclick="getElStrong()">
+    <input type="submit" value="em" onclick="getElEm()">
+    <input type="submit" value="p" onclick="getElP()" >
+</div>
+<div class="container" id="newStr">
+
+</div>
+
+<script>
+    function getElStr(){
+        let str=document.getElementById("app").value;
+        let newStr=document.getElementById("newStr");
+        let newTxt=document.createTextNode(str);
+        let div2=document.createElement("div");
+        div2.appendChild(newTxt);
+        newStr.appendChild(div2);
+    }
+    function getElStrong(){
+        let str=document.getElementById("app").value;
+        let newStr=document.getElementById("newStr");
+        let newTxt=document.createTextNode(str);
+        let div2=document.createElement("strong");
+        div2.appendChild(newTxt);
+        newStr.appendChild(div2);
+    }
+
+    function getElEm(){
+        let str=document.getElementById("app").value;
+        let newStr=document.getElementById("newStr");
+        let newTxt=document.createTextNode(str);
+        let div2=document.createElement("div");
+        let div3=document.createElement("em");
+        div3.appendChild(newTxt);
+        div2.appendChild(div3);
+        newStr.appendChild(div2)
+        
+
+    }
+
+    function getElP(){
+        let str=document.getElementById("app").value;
+        let newStr=document.getElementById("newStr");
+        let newTxt=document.createTextNode(str);
+        let div2=document.createElement("p");
+        div2.appendChild(newTxt);
+        newStr.appendChild(div2);
+    }
+
+</script>
+
+
+
+</body>
+</html>
