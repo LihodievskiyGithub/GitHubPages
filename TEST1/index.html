@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+<body>
+  <main class="project">
+    <form name="form" id="form" class="project__actions">
+      <input id="input" type="text">
+      <button class="active" id="button" type="submit">Add tag</button>
+    </form>
+    <ul class="project__list">
+    </ul>
+
+    <div class="project__readonly">
+      <span>ReadOnly mode</span>
+      <input id="readonly" type="checkbox">
+    </div>
+  </main>
+
+  <template id="element-template">
+    <li class="project__item">
+      <span class="project__tag"></span>
+      <button class="project__item-cross">
+        <span></span>
+        <span></span>
+      </button>
+    </li>
+  </template>
+
+  
+  <script src="./scripts/script.js" type="module"></script>
+</body>
+</html>
